@@ -33,7 +33,6 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 The
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-
 | Name | Function | IP Address | Operating System |
 | - | - | - | - |
 | Jump Box | Gateway | 10.1.0.4 | Linux |
@@ -55,7 +54,6 @@ Machines within the network can only be accessed by Jump Box.
 
 A summary of the access policies in place can be found in the table below.
 
-
 | Name | Publicly Accessible | Allowed IP Addresses |
 | - | - | - |
 | Jump Box | Yes | 162.218.230.218 |
@@ -76,7 +74,7 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+![DockerPS](Images/Docker_ps.png)
 
 ### Target Machines & Beats
 
@@ -109,3 +107,4 @@ _TODO: Answer the following questions to fill in the blanks:_
 - _Which URL do you navigate to in order to check that the ELK server is running?
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+
