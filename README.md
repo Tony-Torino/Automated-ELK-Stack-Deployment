@@ -2,11 +2,11 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![Diagram](Network-Diagram.png)
+![Diagram](images/Network-Diagram.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the Full-playbook.yml file may be used to install only certain pieces of it, such as Filebeat.
 
-- _TODO: Enter the playbook file._
+- _Full-playbook.yml_
 
 This document contains the following details:
 
@@ -27,38 +27,40 @@ Load balancing ensures that the application will be highly _____, in addition to
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
 
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+- _FileBeat collects log events and fowards them to the Elasticsearch for indexing._
+- _Metricbeat takes the metrics and statistics that it collects and ships them to the output that you specify, such as Elasticsearch_
 
-The configuration details of each machine may be found below.
+The
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
+
 
 | Name | Function | IP Address | Operating System |
 | - | - | - | - |
-| Jump Box | Gateway | 10.0.0.1 | Linux |
-| TODO |   |   |   |
-| TODO |   |   |   |
-| TODO |   |   |   |
+| Jump Box | Gateway | 10.1.0.4 | Linux |
+| Elk Server |   | 10.2.0.5 | Linux |
+| Web-1 | web | 10.1.0.5 | Linux |
+| Web-2 | backup | 10.1.0.6 | Linux |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet.
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+Only the Jump Box machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 
-- _TODO: Add whitelisted IP addresses_
+- _162.218.230.218_
 
-Machines within the network can only be accessed by _____.
+Machines within the network can only be accessed by Jump Box.
 
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+- _The Elk vm can be access only by the jumbox ip adress 10.1.0.4_
 
 A summary of the access policies in place can be found in the table below.
 
+
 | Name | Publicly Accessible | Allowed IP Addresses |
 | - | - | - |
-| Jump Box | Yes/No | 10.0.0.1 10.0.0.2 |
-|   |   |   |
-|   |   |   |
+| Jump Box | Yes | 162.218.230.218 |
+| Web1/2 | no |   |
+| Elk | no | 162.218.230.218 |
 
 ### Elk Configuration
 
@@ -107,4 +109,3 @@ _TODO: Answer the following questions to fill in the blanks:_
 - _Which URL do you navigate to in order to check that the ELK server is running?
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
-

@@ -1,0 +1,97 @@
+---
+    - name: Config Web VM with docker
+    hosts: webservers
+    become: true
+    tasks:
+    - name: docker.io
+      apt:
+        name: docker.io
+        state: present
+    - name: pip3
+      apt:
+        name: python3-pip
+        state: present
+    - name: Docker module
+      pip:
+        name: docker
+        state: present
+    - name: download and launch a docker web container
+      docker_container:
+        name: dvwa
+        image: cyberxsecurity/dvwa
+        state: started
+        restart_policy: always
+        published_ports: 80:80
+    - name: Configure Elk VM with Docker
+      hosts: Elk-Server
+      remote_user: Elk
+      become: true
+      tasks:
+        # Use apt module
+        - name: Install docker.io
+          apt:
+            update_cache: yes
+            name: docker.io
+            state: present
+          # Use apt module
+        - name: Install python3-pip
+          apt:
+            force_apt_get: yes
+            name: python3-pip
+            state: present
+          # Use pip module (It will default to pip3)
+        - name: Install Docker module
+          pip:
+            name: docker
+            state: present
+          # Use command module
+        - name: Increase virtual memory
+          command: sysctl -w vm.max_map_count=262144
+       #   # Use docker_container module
+        - name: download and launch a docker elk container
+          docker_container:
+            name: elk
+            image: sebp/elk:761
+            state: started
+            restart_policy: always
+            # Please list the ports that ELK runs on
+            published_ports:
+              -  5601:5601
+              -  9200:9200
+              -  5044:5044
+    - name: Install deb pkg
+    hosts: webservers
+    become: true
+    tasks:
+    - name: Download deb file
+      command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
+    - name: Install Filebeat
+      command: dpkg -i filebeat-7.6.1-amd64.deb
+    - name: Copy
+      copy:
+        src: /etc/ansible/files/filebeat-configuration.yml
+        dest: /etc/filebeat/filebeat.yml
+    - name: Filebeat
+      command: filebeat modules enable system
+    - name: Filebeat Setup
+      command: filebeat setup
+    - name: Start Filebeat
+      shell: sudo service filebeat start
+    - name: metricbeat
+    hosts: webservers
+    become: true
+    tasks:
+     - name: Download Metric
+       shell: curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.6.1-amd64.deb
+     - name: Install Metric
+       shell: sudo dpkg -i metricbeat-7.6.1-amd64.deb
+     - name: Trandfer file
+       copy:
+        src: /etc/ansible/files/metric.yml
+        dest: /etc/metricbeat/metricbeat.yml
+     - name: Enable Metricbeat Module
+       shell: sudo metricbeat modules enable docker
+     - name: Metricbeat setup
+       shell: sudo metricbeat setup
+     - name: Metric
+       shell: sudo service metricbeat start          
