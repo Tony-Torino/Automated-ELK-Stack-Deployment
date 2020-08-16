@@ -21,9 +21,10 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
+Load balancing ensures that the application will be highly availability, in addition to restricting request to the network.
 
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+- _A load balancer defends against distributed denial of service (DDoS)_
+- _The advantages of a Jump Box is that it allows you to acces and mannage all the devices in the network_
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
 
@@ -33,10 +34,11 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 The
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
+
 | Name | Function | IP Address | Operating System |
 | - | - | - | - |
 | Jump Box | Gateway | 10.1.0.4 | Linux |
-| Elk Server |   | 10.2.0.5 | Linux |
+| Elk Server | data collection | 10.2.0.5 | Linux |
 | Web-1 | web | 10.1.0.5 | Linux |
 | Web-2 | backup | 10.1.0.6 | Linux |
 
@@ -54,6 +56,7 @@ Machines within the network can only be accessed by Jump Box.
 
 A summary of the access policies in place can be found in the table below.
 
+
 | Name | Publicly Accessible | Allowed IP Addresses |
 | - | - | - |
 | Jump Box | Yes | 162.218.230.218 |
@@ -64,7 +67,7 @@ A summary of the access policies in place can be found in the table below.
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
 
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+- _Ansible streamlines and simplifies cloud provisioning, configuration management, application deployment_
 
 The playbook implements the following tasks:
 
@@ -107,4 +110,3 @@ _TODO: Answer the following questions to fill in the blanks:_
 - _Which URL do you navigate to in order to check that the ELK server is running?
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
-
